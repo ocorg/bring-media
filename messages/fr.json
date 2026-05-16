@@ -1,0 +1,300 @@
+{
+  "auth": {
+    "login": {
+      "title": "Bon retour",
+      "subtitle": "Connectez-vous à BRING Media Terminal",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "loading": "Connexion...",
+      "error": "E-mail ou mot de passe invalide"
+    },
+    "acceptInvite": {
+      "title": "Définir votre mot de passe",
+      "subtitle": "Finalisez la création de votre compte",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "Créer le compte",
+      "loading": "Création du compte...",
+      "tokenInvalid": "Ce lien d'invitation est invalide ou a expiré"
+    }
+  },
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "clients": "Clients",
+    "projects": "Projets",
+    "calendar": "Calendrier",
+    "workload": "Charge de travail",
+    "notifications": "Notifications",
+    "settings": "Paramètres",
+    "admin": "Admin",
+    "signOut": "Se déconnecter"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "kpi": {
+      "activeClients": "Clients actifs",
+      "tasksDueThisWeek": "Échéances cette semaine",
+      "openApprovalGates": "Approbations en attente",
+      "teamUtilization": "Utilisation de l'équipe",
+      "overdue": "en retard"
+    },
+    "sections": {
+      "overdueTasks": "Tâches en retard",
+      "teamWorkload": "Charge de l'équipe"
+    },
+    "actions": {
+      "newClient": "Nouveau client",
+      "newProject": "Nouveau projet"
+    },
+    "empty": {
+      "overdue": "Aucune tâche en retard"
+    }
+  },
+  "clients": {
+    "title": "Clients",
+    "new": "Nouveau client",
+    "empty": "Aucun client pour l'instant",
+    "emptyDescription": "Créez votre premier client pour commencer",
+    "health": {
+      "healthy": "Sain",
+      "at_risk": "À risque",
+      "critical": "Critique"
+    },
+    "form": {
+      "name": "Nom du client",
+      "industry": "Secteur",
+      "contactName": "Nom du contact",
+      "contactEmail": "E-mail du contact",
+      "contactPhone": "Téléphone du contact",
+      "retainerType": "Type de contrat",
+      "contractStart": "Début du contrat",
+      "contractEnd": "Fin du contrat",
+      "driveFolderUrl": "URL du dossier Google Drive",
+      "brandKitUrl": "URL du kit de marque",
+      "websiteUrl": "Site web",
+      "internalNotes": "Notes internes",
+      "logoUpload": "Télécharger le logo",
+      "submit": "Créer le client",
+      "submitEdit": "Enregistrer les modifications",
+      "loading": "Enregistrement..."
+    },
+    "tabs": {
+      "overview": "Vue d'ensemble",
+      "projects": "Projets",
+      "activity": "Activité"
+    },
+    "overview": {
+      "contactInfo": "Informations de contact",
+      "contractDetails": "Détails du contrat",
+      "linkedAssets": "Ressources liées",
+      "internalNotes": "Notes internes"
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "new": "Nouveau projet",
+    "empty": "Aucun projet pour l'instant",
+    "emptyDescription": "Aucun projet n'a encore été créé pour ce client",
+    "status": {
+      "active": "Actif",
+      "paused": "En pause",
+      "completed": "Terminé",
+      "archived": "Archivé"
+    },
+    "form": {
+      "selectClient": "Sélectionner un client",
+      "selectServiceType": "Sélectionner un type de service",
+      "name": "Nom du projet",
+      "description": "Description",
+      "startDate": "Date de début",
+      "endDate": "Date de fin",
+      "submit": "Créer le projet",
+      "loading": "Création..."
+    },
+    "pipeline": {
+      "stage": "Étape",
+      "requiresApproval": "Nécessite une approbation"
+    }
+  },
+  "tasks": {
+    "new": "Nouvelle tâche",
+    "empty": "Aucune tâche dans cette étape",
+    "priority": {
+      "urgent": "Urgent",
+      "high": "Haute",
+      "normal": "Normale",
+      "low": "Basse"
+    },
+    "status": {
+      "awaitingApproval": "En attente d'approbation",
+      "recurring": "Récurrente"
+    },
+    "actions": {
+      "logTime": "Saisir le temps",
+      "addComment": "Ajouter un commentaire",
+      "uploadFile": "Joindre un fichier",
+      "advance": "Passer à l'étape suivante",
+      "approve": "Approuver et avancer",
+      "delete": "Supprimer la tâche"
+    },
+    "detail": {
+      "description": "Description",
+      "assignee": "Assigné à",
+      "dueDate": "Échéance",
+      "priority": "Priorité",
+      "tags": "Étiquettes",
+      "tagsPlaceholder": "Ajouter des étiquettes séparées par des virgules",
+      "stage": "Étape actuelle",
+      "timeTracking": "Suivi du temps",
+      "attachments": "Pièces jointes",
+      "comments": "Commentaires",
+      "activity": "Activité"
+    },
+    "timeLogger": {
+      "hours": "Heures",
+      "hoursPlaceholder": "ex. 1.5",
+      "note": "Note",
+      "notePlaceholder": "Sur quoi avez-vous travaillé ?",
+      "submit": "Enregistrer",
+      "loading": "Enregistrement...",
+      "estimated": "Estimé",
+      "actual": "Réel",
+      "noEstimate": "Aucune estimation définie"
+    },
+    "comments": {
+      "placeholder": "Écrire un commentaire...",
+      "submit": "Publier",
+      "loading": "Publication...",
+      "edited": "modifié",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "save": "Enregistrer",
+      "cancel": "Annuler"
+    },
+    "attachments": {
+      "dropzone": "Déposez des fichiers ici ou cliquez pour en sélectionner",
+      "maxSize": "10 Mo maximum par fichier",
+      "uploading": "Téléchargement...",
+      "download": "Télécharger",
+      "delete": "Supprimer"
+    }
+  },
+  "settings": {
+    "pipeline": {
+      "title": "Modèles de pipeline",
+      "subtitle": "Définir les étapes pour chaque type de service",
+      "warningBanner": "Les modifications ne s'appliquent qu'aux futurs projets — les projets existants ne sont pas affectés",
+      "addStage": "Ajouter une étape",
+      "stageName": "Nom de l'étape",
+      "requiresApproval": "Nécessite une approbation",
+      "save": "Enregistrer le modèle",
+      "loading": "Enregistrement..."
+    },
+    "bundle": {
+      "title": "Modèles de bundle",
+      "subtitle": "Définir la liste de tâches par défaut pour chaque type de service",
+      "warningBanner": "Les modifications ne s'appliquent qu'aux futurs projets — les projets existants ne sont pas affectés",
+      "addTask": "Ajouter une tâche",
+      "taskTitle": "Titre de la tâche",
+      "taskDescription": "Description",
+      "defaultRole": "Rôle par défaut",
+      "estimatedHours": "Heures estimées",
+      "save": "Enregistrer le modèle",
+      "loading": "Enregistrement..."
+    },
+    "serviceTypes": {
+      "title": "Types de services",
+      "subtitle": "Gérer les types de services proposés par votre agence",
+      "new": "Nouveau type de service",
+      "name": "Nom",
+      "slug": "Slug",
+      "color": "Couleur",
+      "active": "Actif"
+    },
+    "team": {
+      "title": "Équipe",
+      "subtitle": "Gérer les membres de l'équipe et envoyer des invitations",
+      "invite": "Inviter un membre",
+      "inviteEmail": "Adresse e-mail",
+      "inviteRole": "Rôle",
+      "inviteSubmit": "Envoyer l'invitation",
+      "inviteLoading": "Envoi...",
+      "inviteSent": "Invitation envoyée",
+      "roles": {
+        "manager": "Manager",
+        "team_member": "Membre de l'équipe"
+      }
+    },
+    "profile": {
+      "title": "Profil",
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "language": "Langue préférée",
+      "languages": {
+        "en": "Anglais",
+        "fr": "Français"
+      },
+      "save": "Enregistrer les modifications",
+      "loading": "Enregistrement...",
+      "saved": "Profil mis à jour"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Tout marquer comme lu",
+    "empty": "Vous êtes à jour",
+    "emptyDescription": "Aucune notification pour l'instant",
+    "types": {
+      "task_assigned": "Tâche assignée",
+      "status_changed": "Statut de tâche modifié",
+      "comment_added": "Nouveau commentaire",
+      "deadline_approaching": "Échéance proche",
+      "approval_required": "Approbation requise"
+    }
+  },
+  "admin": {
+    "title": "Admin",
+    "maintenance": {
+      "title": "Mode maintenance",
+      "description": "Lorsqu'activé, tous les utilisateurs sauf les super admins voient un écran de maintenance",
+      "enable": "Activer le mode maintenance",
+      "disable": "Désactiver le mode maintenance"
+    },
+    "emailTest": {
+      "title": "Test e-mail",
+      "to": "Envoyer à",
+      "send": "Envoyer un e-mail de test",
+      "loading": "Envoi...",
+      "success": "E-mail de test envoyé"
+    }
+  },
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue. Veuillez réessayer.",
+    "success": "Enregistré avec succès",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "search": "Rechercher",
+    "searchPlaceholder": "Rechercher des clients, projets, tâches...",
+    "noResults": "Aucun résultat trouvé",
+    "required": "Ce champ est obligatoire",
+    "uploading": "Téléchargement...",
+    "download": "Télécharger",
+    "by": "par",
+    "on": "le",
+    "overdue": "En retard",
+    "dueDate": "Échéance",
+    "createdAt": "Créé le",
+    "updatedAt": "Modifié le",
+    "notSet": "Non défini",
+    "viewAll": "Voir tout",
+    "close": "Fermer",
+    "open": "Ouvrir",
+    "unassigned": "Non assigné"
+  }
+}

@@ -1,0 +1,300 @@
+{
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to BRING Media Terminal",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Sign in",
+      "loading": "Signing in...",
+      "error": "Invalid email or password"
+    },
+    "acceptInvite": {
+      "title": "Set your password",
+      "subtitle": "Complete your account setup",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "submit": "Create account",
+      "loading": "Creating account...",
+      "tokenInvalid": "This invitation link is invalid or has expired"
+    }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "projects": "Projects",
+    "calendar": "Calendar",
+    "workload": "Workload",
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "admin": "Admin",
+    "signOut": "Sign out"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "kpi": {
+      "activeClients": "Active clients",
+      "tasksDueThisWeek": "Due this week",
+      "openApprovalGates": "Open approvals",
+      "teamUtilization": "Team utilization",
+      "overdue": "overdue"
+    },
+    "sections": {
+      "overdueTasks": "Overdue tasks",
+      "teamWorkload": "Team workload"
+    },
+    "actions": {
+      "newClient": "New client",
+      "newProject": "New project"
+    },
+    "empty": {
+      "overdue": "No overdue tasks"
+    }
+  },
+  "clients": {
+    "title": "Clients",
+    "new": "New client",
+    "empty": "No clients yet",
+    "emptyDescription": "Create your first client to get started",
+    "health": {
+      "healthy": "Healthy",
+      "at_risk": "At risk",
+      "critical": "Critical"
+    },
+    "form": {
+      "name": "Client name",
+      "industry": "Industry",
+      "contactName": "Contact name",
+      "contactEmail": "Contact email",
+      "contactPhone": "Contact phone",
+      "retainerType": "Retainer type",
+      "contractStart": "Contract start",
+      "contractEnd": "Contract end",
+      "driveFolderUrl": "Google Drive folder URL",
+      "brandKitUrl": "Brand kit URL",
+      "websiteUrl": "Website URL",
+      "internalNotes": "Internal notes",
+      "logoUpload": "Upload logo",
+      "submit": "Create client",
+      "submitEdit": "Save changes",
+      "loading": "Saving..."
+    },
+    "tabs": {
+      "overview": "Overview",
+      "projects": "Projects",
+      "activity": "Activity"
+    },
+    "overview": {
+      "contactInfo": "Contact information",
+      "contractDetails": "Contract details",
+      "linkedAssets": "Linked assets",
+      "internalNotes": "Internal notes"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "new": "New project",
+    "empty": "No projects yet",
+    "emptyDescription": "No projects have been created for this client yet",
+    "status": {
+      "active": "Active",
+      "paused": "Paused",
+      "completed": "Completed",
+      "archived": "Archived"
+    },
+    "form": {
+      "selectClient": "Select client",
+      "selectServiceType": "Select service type",
+      "name": "Project name",
+      "description": "Description",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "submit": "Create project",
+      "loading": "Creating..."
+    },
+    "pipeline": {
+      "stage": "Stage",
+      "requiresApproval": "Requires approval"
+    }
+  },
+  "tasks": {
+    "new": "New task",
+    "empty": "No tasks in this stage",
+    "priority": {
+      "urgent": "Urgent",
+      "high": "High",
+      "normal": "Normal",
+      "low": "Low"
+    },
+    "status": {
+      "awaitingApproval": "Awaiting approval",
+      "recurring": "Recurring"
+    },
+    "actions": {
+      "logTime": "Log time",
+      "addComment": "Add comment",
+      "uploadFile": "Upload file",
+      "advance": "Advance to next stage",
+      "approve": "Approve & advance",
+      "delete": "Delete task"
+    },
+    "detail": {
+      "description": "Description",
+      "assignee": "Assignee",
+      "dueDate": "Due date",
+      "priority": "Priority",
+      "tags": "Tags",
+      "tagsPlaceholder": "Add tags separated by commas",
+      "stage": "Current stage",
+      "timeTracking": "Time tracking",
+      "attachments": "Attachments",
+      "comments": "Comments",
+      "activity": "Activity"
+    },
+    "timeLogger": {
+      "hours": "Hours",
+      "hoursPlaceholder": "e.g. 1.5",
+      "note": "Note",
+      "notePlaceholder": "What did you work on?",
+      "submit": "Log time",
+      "loading": "Saving...",
+      "estimated": "Estimated",
+      "actual": "Actual",
+      "noEstimate": "No estimate set"
+    },
+    "comments": {
+      "placeholder": "Write a comment...",
+      "submit": "Post",
+      "loading": "Posting...",
+      "edited": "edited",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "attachments": {
+      "dropzone": "Drop files here or click to upload",
+      "maxSize": "Max 10 MB per file",
+      "uploading": "Uploading...",
+      "download": "Download",
+      "delete": "Delete"
+    }
+  },
+  "settings": {
+    "pipeline": {
+      "title": "Pipeline templates",
+      "subtitle": "Define the stages for each service type",
+      "warningBanner": "Changes apply to future projects only — existing projects are not affected",
+      "addStage": "Add stage",
+      "stageName": "Stage name",
+      "requiresApproval": "Requires approval",
+      "save": "Save template",
+      "loading": "Saving..."
+    },
+    "bundle": {
+      "title": "Bundle templates",
+      "subtitle": "Define the default task list for each service type",
+      "warningBanner": "Changes apply to future projects only — existing projects are not affected",
+      "addTask": "Add task",
+      "taskTitle": "Task title",
+      "taskDescription": "Description",
+      "defaultRole": "Default role",
+      "estimatedHours": "Estimated hours",
+      "save": "Save template",
+      "loading": "Saving..."
+    },
+    "serviceTypes": {
+      "title": "Service types",
+      "subtitle": "Manage the types of services your agency offers",
+      "new": "New service type",
+      "name": "Name",
+      "slug": "Slug",
+      "color": "Color",
+      "active": "Active"
+    },
+    "team": {
+      "title": "Team",
+      "subtitle": "Manage team members and send invitations",
+      "invite": "Invite member",
+      "inviteEmail": "Email address",
+      "inviteRole": "Role",
+      "inviteSubmit": "Send invitation",
+      "inviteLoading": "Sending...",
+      "inviteSent": "Invitation sent",
+      "roles": {
+        "manager": "Manager",
+        "team_member": "Team member"
+      }
+    },
+    "profile": {
+      "title": "Profile",
+      "name": "Full name",
+      "email": "Email address",
+      "language": "Preferred language",
+      "languages": {
+        "en": "English",
+        "fr": "French"
+      },
+      "save": "Save changes",
+      "loading": "Saving...",
+      "saved": "Profile updated"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "empty": "You're all caught up",
+    "emptyDescription": "No notifications yet",
+    "types": {
+      "task_assigned": "Task assigned to you",
+      "status_changed": "Task status changed",
+      "comment_added": "New comment on a task",
+      "deadline_approaching": "Deadline approaching",
+      "approval_required": "Approval required"
+    }
+  },
+  "admin": {
+    "title": "Admin",
+    "maintenance": {
+      "title": "Maintenance mode",
+      "description": "When enabled, all users except super admins see a holding screen",
+      "enable": "Enable maintenance mode",
+      "disable": "Disable maintenance mode"
+    },
+    "emailTest": {
+      "title": "Email test",
+      "to": "Send to",
+      "send": "Send test email",
+      "loading": "Sending...",
+      "success": "Test email sent"
+    }
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "error": "Something went wrong. Please try again.",
+    "success": "Saved successfully",
+    "confirm": "Confirm",
+    "back": "Back",
+    "search": "Search",
+    "searchPlaceholder": "Search clients, projects, tasks...",
+    "noResults": "No results found",
+    "required": "This field is required",
+    "uploading": "Uploading...",
+    "download": "Download",
+    "by": "by",
+    "on": "on",
+    "overdue": "Overdue",
+    "dueDate": "Due date",
+    "createdAt": "Created",
+    "updatedAt": "Updated",
+    "notSet": "Not set",
+    "viewAll": "View all",
+    "close": "Close",
+    "open": "Open",
+    "unassigned": "Unassigned"
+  }
+}

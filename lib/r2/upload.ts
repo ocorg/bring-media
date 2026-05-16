@@ -1,6 +1,6 @@
 import { PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { randomUUID } from 'crypto';
-import { s3Client } from './client';
+import { getS3Client } from './client';
 
 const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME!;
 const PUBLIC_URL = process.env.CLOUDFLARE_R2_PUBLIC_URL!;
@@ -42,7 +42,7 @@ export async function uploadFile(
   const ext = originalName.split('.').pop() ?? 'bin';
   const key = `${folder}/${randomUUID()}.${ext}`;
 
-  await s3Client.send(
+  await getS3Client().send(
     new PutObjectCommand({
       Bucket: BUCKET,
       Key: key,
@@ -58,7 +58,7 @@ export async function uploadFile(
 }
 
 export async function deleteFile(key: string): Promise<void> {
-  await s3Client.send(
+  await getS3Client().send(
     new DeleteObjectCommand({
       Bucket: BUCKET,
       Key: key,

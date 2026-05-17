@@ -2,8 +2,8 @@ import { auth } from '@/lib/auth/auth';
 import { redirect, notFound } from 'next/navigation';
 import { prisma } from '@/lib/db/prisma';
 import BackLink from '@/components/ui/BackLink';
-import PipelineView from '@/components/projects/PipelineView';
 import ProjectDetailHeader from '@/components/projects/ProjectDetailHeader';
+import ProjectPipelineClient from '@/components/projects/ProjectPipelineClient';
 import type { PipelineStage } from '@/lib/actions/serviceTypes';
 
 const STATUS_COLORS: Record<string, string> = {
@@ -22,22 +22,32 @@ export default async function ProjectDetailPage({
   const session = await auth();
   if (!session?.user) redirect('/login');
 
-  const project = await prisma.project.findUnique({
-    where: { id: projectId },
-    include: {
-      client: { select: { id: true, name: true } },
-      serviceType: { select: { name: true, color: true } },
-      tasks: {
-        orderBy: { createdAt: 'asc' },
-        select: {
-          id: true,
-          title: true,
-          status: true,
-          priority: true,
+  const [project, teamMembers] = await Promise.all([
+    prisma.project.findUnique({
+      where: { id: projectId },
+      include: {
+        client: { select: { id: true, name: true } },
+        serviceType: { select: { name: true, color: true } },
+        tasks: {
+          orderBy: { createdAt: 'asc' },
+          select: {
+            id: true,
+            title: true,
+            status: true,
+            priority: true,
+            dueDate: true,
+            estimatedHours: true,
+            assignedTo: { select: { id: true, name: true, avatarUrl: true } },
+            _count: { select: { comments: true, attachments: true } },
+          },
         },
       },
-    },
-  });
+    }),
+    prisma.user.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: 'asc' },
+    }),
+  ]);
 
   if (!project) notFound();
 
@@ -159,26 +169,23 @@ export default async function ProjectDetailPage({
         )}
       </div>
 
-      {/* Pipeline */}
+      {/* Pipeline + tasks (client interactive zone) */}
       <div style={{ marginBottom: '2rem' }}>
-        <p
-          style={{
-            fontSize: '11px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: 'var(--muted)',
-            marginBottom: '1rem',
-          }}
-        >
-          Pipeline
-        </p>
-        {stages.length === 0 ? (
-          <p style={{ color: 'var(--muted)', fontSize: '13px' }}>
-            No pipeline stages — this project has no snapshot.
-          </p>
-        ) : (
-          <PipelineView stages={stages} tasks={project.tasks} />
-        )}
+        <ProjectPipelineClient
+          projectId={project.id}
+          serviceTypeId={project.serviceTypeId}
+          stages={stages}
+          initialTasks={project.tasks.map((t) => ({
+            ...t,
+            estimatedHours: t.estimatedHours ? t.estimatedHours.toNumber() : null,
+            assignee: t.assignedTo ?? null,
+          }))}
+          teamMembers={teamMembers}
+          userRole={session!.user.role}
+          canCreateTask={
+            session!.user.role === 'manager' || session!.user.role === 'super_admin'
+          }
+        />
       </div>
     </div>
   );

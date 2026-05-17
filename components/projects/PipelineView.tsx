@@ -1,6 +1,7 @@
 'use client';
 
 import { ShieldCheck } from 'lucide-react';
+import TaskCard from '@/components/tasks/TaskCard';
 import type { PipelineStage } from '@/lib/actions/serviceTypes';
 
 interface Task {
@@ -8,21 +9,19 @@ interface Task {
   title: string;
   status: string;
   priority: string;
+  dueDate: Date | null;
+  estimatedHours: number | null;
+  assignee: { id: string; name: string; avatarUrl: string | null } | null;
+  _count: { comments: number; attachments: number };
 }
 
 interface PipelineViewProps {
   stages: PipelineStage[];
   tasks: Task[];
+  onTaskClick: (taskId: string) => void;
 }
 
-const PRIORITY_BORDER: Record<string, string> = {
-  urgent: 'var(--danger)',
-  high: 'var(--warning)',
-  normal: 'var(--muted)',
-  low: 'var(--border)',
-};
-
-export default function PipelineView({ stages, tasks }: PipelineViewProps) {
+export default function PipelineView({ stages, tasks, onTaskClick }: PipelineViewProps) {
   return (
     <div
       style={{
@@ -109,27 +108,8 @@ export default function PipelineView({ stages, tasks }: PipelineViewProps) {
                   Empty
                 </p>
               ) : (
-                stageTasks.map((task) => (
-                  <div
-                    key={task.id}
-                    style={{
-                      background: 'var(--surface-2)',
-                      border: '1px solid var(--border)',
-                      borderLeft: `3px solid ${PRIORITY_BORDER[task.priority] ?? 'var(--muted)'}`,
-                      borderRadius: 'var(--radius-sm)',
-                      padding: '8px 10px',
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: '12px',
-                        color: 'var(--text)',
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {task.title}
-                    </p>
-                  </div>
+                stageTasks.map((t) => (
+                  <TaskCard key={t.id} task={t} onClick={onTaskClick} />
                 ))
               )}
             </div>

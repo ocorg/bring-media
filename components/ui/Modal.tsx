@@ -43,21 +43,21 @@ export default function Modal({ open, onClose, title, children, maxWidth = '480p
             style={{
               position: 'fixed',
               inset: 0,
-              background: 'rgba(0,0,0,0.6)',
               zIndex: 1000,
+              background: 'rgba(0,0,0,0.6)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '1.5rem',
             }}
-          />
+          >
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
+            onClick={(e) => e.stopPropagation()}
             style={{
-              position: 'fixed',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              zIndex: 1001,
               width: '100%',
               maxWidth,
               maxHeight: '90vh',
@@ -95,6 +95,7 @@ export default function Modal({ open, onClose, title, children, maxWidth = '480p
               </div>
             )}
             {children}
+          </motion.div>
           </motion.div>
         </>
       )}

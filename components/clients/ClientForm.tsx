@@ -73,7 +73,7 @@ export default function ClientForm({ mode = 'create', clientId, defaultValues }:
     fd.append('file', file);
 
     try {
-      const res = await fetch('/api/upload/logo', { method: 'POST', body: fd });
+      const res = await fetch('/api/auth/upload/logo', { method: 'POST', body: fd });
       const text = await res.text();
       let json: any;
       try {

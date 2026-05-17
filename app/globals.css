@@ -17,6 +17,10 @@
   --danger: #ef4444;
   --info: #3b82f6;
 
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
   --priority-urgent: #ef4444;
   --priority-high: #f59e0b;
   --priority-normal: #8b7fa8;

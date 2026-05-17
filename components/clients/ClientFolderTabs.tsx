@@ -6,6 +6,7 @@ import Badge from '@/components/ui/Badge';
 import EmptyState from '@/components/ui/EmptyState';
 import Button from '@/components/ui/Button';
 import { Plus, ExternalLink, Clock } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 type Tab = 'overview' | 'projects' | 'activity';
 
@@ -54,6 +55,7 @@ function AssetLink({ label, url }: { label: string; url?: string | null }) {
 
 export default function ClientFolderTabs({ client, canEdit }: ClientFolderTabsProps) {
   const [activeTab, setActiveTab] = useState<Tab>('overview');
+  const router = useRouter();
 
   const tabs: { key: Tab; label: string; count?: number }[] = [
     { key: 'overview', label: 'Overview' },
@@ -147,7 +149,9 @@ export default function ClientFolderTabs({ client, canEdit }: ClientFolderTabsPr
         <div>
           {canEdit && (
             <div style={{ marginBottom: '1.25rem' }}>
-              <Button variant="primary"><Plus size={14} />New project</Button>
+              <Button variant="primary" onClick={() => router.push('/projects/new')}>
+                <Plus size={14} />New project
+              </Button>
             </div>
           )}
           {client.projects?.length === 0 ? (

@@ -39,7 +39,7 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { key: 'dashboard', href: '/dashboard', icon: <LayoutDashboard size={16} />, roles: ['super_admin', 'manager', 'team_member'] },
+  { key: 'dashboard', href: '/', icon: <LayoutDashboard size={16} />, roles: ['super_admin', 'manager', 'team_member'] },
   { key: 'clients', href: '/clients', icon: <Building2 size={16} />, roles: ['super_admin', 'manager'] },
   { key: 'projects', href: '/projects', icon: <FolderKanban size={16} />, roles: ['super_admin', 'manager'] },
   { key: 'calendar', href: '/calendar', icon: <Calendar size={16} />, roles: ['super_admin', 'manager'] },
@@ -62,6 +62,7 @@ export default function Sidebar({ user, locale }: { user: SidebarUser; locale: s
   const visibleBottom = BOTTOM_ITEMS.filter((item) => item.roles.includes(user.role));
 
   function isActive(href: string) {
+    if (href === '/') return /^\/[a-z]{2}$/.test(pathname) || pathname === '/';
     return pathname.includes(href);
   }
 

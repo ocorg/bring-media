@@ -16,7 +16,7 @@ export async function GET(
         project: {
           select: { id: true, pipelineSnapshot: true },
         },
-        assignee: {
+        assignedTo: {
           select: { id: true, name: true, avatarUrl: true },
         },
         comments: {

@@ -45,6 +45,7 @@ export default function Topbar({ user }: { user: TopbarUser }) {
     }}>
       {/* Search trigger */}
       <button
+        onClick={() => document.dispatchEvent(new Event('bring:search:open'))}
         style={{
           display: 'flex',
           alignItems: 'center',

@@ -8,6 +8,7 @@ import { writeActivityLog } from '@/lib/activity/logger';
 import { pusherServer } from '@/lib/pusher/server';
 import type { Prisma, Priority } from '@prisma/client';
 import type { PipelineStage } from './serviceTypes';
+import { createNotification } from './notifications';
 
 type ActionResult<T = undefined> =
   | { success: true; data?: T }
@@ -72,6 +73,20 @@ export async function createTask(data: {
       { taskId: task.id, title: task.title, status: task.status }
     );
 
+    if (validated.assigneeId && validated.assigneeId !== session.user.id) {
+      await createNotification({
+        recipientId: validated.assigneeId,
+        type: 'task_assigned',
+        taskId: task.id,
+        payload: {
+          title: 'Task assigned to you',
+          body: task.title,
+          projectId: validated.projectId,
+          actorName: session.user.name ?? 'Someone',
+        },
+      });
+    }
+
     revalidatePath(`/projects/${validated.projectId}`);
     return { success: true, data: { taskId: task.id } };
   } catch (error) {
@@ -100,13 +115,13 @@ export async function updateTask(
 
     const task = await prisma.task.findUnique({
       where: { id: taskId },
-      select: { projectId: true, assigneeId: true, createdById: true },
+      select: { projectId: true, assignedToId: true, createdById: true },
     });
     if (!task) return { success: false, error: 'Task not found' };
 
     const role = session.user.role;
     const isManager = role === 'manager' || role === 'super_admin';
-    const isAssignee = task.assigneeId === session.user.id;
+    const isAssignee = task.assignedToId === session.user.id;
     if (!isManager && !isAssignee)
       return { success: false, error: 'Permission denied' };
 
@@ -177,6 +192,20 @@ export async function updateTaskStatus(
         from: task.status,
         to: nextStage.name,
       });
+
+      if (task.createdById !== session.user.id) {
+        await createNotification({
+          recipientId: task.createdById,
+          type: 'status_changed',
+          taskId,
+          payload: {
+            title: 'Task status updated',
+            body: `"${task.title}" moved to ${nextStage.name}`,
+            projectId: task.project.id,
+            actorName: session.user.name ?? 'Someone',
+          },
+        });
+      }
 
       revalidatePath(`/projects/${task.project.id}`);
       return { success: true, data: { newStatus: nextStage.name } };
@@ -286,7 +315,7 @@ export async function addComment(
 
     const task = await prisma.task.findUnique({
       where: { id: taskId },
-      select: { projectId: true },
+      select: { projectId: true, title: true, assignedToId: true, createdById: true },
     });
 
     if (task) {
@@ -294,6 +323,28 @@ export async function addComment(
         taskId,
         commentId: comment.id,
       });
+
+      // Notify everyone involved — deduped, skip commenter
+      const involved = new Set<string>();
+      if (task.assignedToId && task.assignedToId !== session.user.id)
+        involved.add(task.assignedToId);
+      if (task.createdById !== session.user.id)
+        involved.add(task.createdById);
+
+      for (const recipientId of involved) {
+        await createNotification({
+          recipientId,
+          type: 'comment_added',
+          taskId,
+          payload: {
+            title: 'New comment',
+            body: `${session.user.name ?? 'Someone'} commented on "${task.title}"`,
+            projectId: task.projectId,
+            actorName: session.user.name ?? 'Someone',
+          },
+        });
+      }
+
       revalidatePath(`/projects/${task.projectId}`);
     }
 

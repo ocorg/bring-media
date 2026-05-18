@@ -249,6 +249,12 @@ model Notification {
   createdAt   DateTime         @default(now())
 }
 
+model SystemSetting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
 model ActivityLog {
   id         String     @id @default(cuid())
   entityType EntityType

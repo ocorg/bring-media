@@ -48,7 +48,7 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 const BOTTOM_ITEMS: NavItem[] = [
-  { key: 'settings', href: '/settings/profile', icon: <Settings size={16} />, roles: ['super_admin', 'manager', 'team_member'] },
+  { key: 'settings', href: '/settings', icon: <Settings size={16} />, roles: ['super_admin', 'manager', 'team_member'] },
   { key: 'admin', href: '/admin', icon: <Shield size={16} />, roles: ['super_admin'] },
 ];
 

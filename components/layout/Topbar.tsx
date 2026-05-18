@@ -7,7 +7,8 @@ import { Search, Settings, LogOut } from 'lucide-react';
 import type { Role } from '@prisma/client';
 import Avatar from '@/components/ui/Avatar';
 import NotificationBell from './NotificationBell';
-import { Link } from '@/lib/i18n/navigation';
+import { Link, usePathname, useRouter } from '@/lib/i18n/navigation';
+import { useParams } from 'next/navigation';
 
 interface TopbarUser {
   id: string;
@@ -20,6 +21,15 @@ interface TopbarUser {
 export default function Topbar({ user }: { user: TopbarUser }) {
   const t = useTranslations();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const params = useParams();
+  const currentLocale = (params?.locale as string) ?? 'en';
+
+  const toggleLocale = () => {
+    const next = currentLocale === 'en' ? 'fr' : 'en';
+    router.replace(pathname, { locale: next });
+  };
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -80,6 +90,38 @@ export default function Topbar({ user }: { user: TopbarUser }) {
 
       {/* Right actions */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        {/* Language toggle */}
+        <button
+          onClick={toggleLocale}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            padding: '4px 10px',
+            background: 'var(--bg)',
+            border: '1px solid var(--border)',
+            borderRadius: 'var(--radius-md)',
+            cursor: 'pointer',
+            fontSize: '11px',
+            fontWeight: '600',
+            letterSpacing: '0.08em',
+            transition: 'border-color 150ms ease, color 150ms ease',
+            color: 'var(--muted)',
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--brand)';
+            (e.currentTarget as HTMLButtonElement).style.color = 'var(--brand)';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)';
+            (e.currentTarget as HTMLButtonElement).style.color = 'var(--muted)';
+          }}
+        >
+          <span style={{ color: currentLocale === 'en' ? 'var(--text)' : 'var(--muted)' }}>EN</span>
+          <span style={{ color: 'var(--border)', fontWeight: '300' }}>/</span>
+          <span style={{ color: currentLocale === 'fr' ? 'var(--text)' : 'var(--muted)' }}>FR</span>
+        </button>
+
         <NotificationBell userId={user.id} />
 
         {/* User dropdown */}
@@ -124,7 +166,7 @@ export default function Topbar({ user }: { user: TopbarUser }) {
                 <p style={{ fontSize: '11px', color: 'var(--muted)' }}>{user.email}</p>
               </div>
               <Link
-                href="/settings/profile"
+                href="/settings/service-types"
                 onClick={() => setDropdownOpen(false)}
                 style={{
                   display: 'flex',

@@ -2,13 +2,14 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import { Search, Settings, LogOut } from 'lucide-react';
+import { Search, Settings, LogOut, Sun, Moon } from 'lucide-react';
 import type { Role } from '@prisma/client';
 import Avatar from '@/components/ui/Avatar';
 import NotificationBell from './NotificationBell';
 import { Link, usePathname, useRouter } from '@/lib/i18n/navigation';
-import { useParams } from 'next/navigation';
+import { useTheme } from '@/lib/hooks/useTheme';
 
 interface TopbarUser {
   id: string;
@@ -20,7 +21,9 @@ interface TopbarUser {
 
 export default function Topbar({ user }: { user: TopbarUser }) {
   const t = useTranslations();
+  const { theme, toggle } = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
   const params = useParams();
@@ -30,7 +33,6 @@ export default function Topbar({ user }: { user: TopbarUser }) {
     const next = currentLocale === 'en' ? 'fr' : 'en';
     router.replace(pathname, { locale: next });
   };
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -41,6 +43,20 @@ export default function Topbar({ user }: { user: TopbarUser }) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const iconBtnStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '32px',
+    height: '32px',
+    background: 'none',
+    border: '1px solid var(--border)',
+    borderRadius: 'var(--radius-md)',
+    color: 'var(--muted)',
+    cursor: 'pointer',
+    transition: 'border-color 150ms ease, color 150ms ease',
+  };
 
   return (
     <header style={{
@@ -83,43 +99,41 @@ export default function Topbar({ user }: { user: TopbarUser }) {
           color: 'var(--muted)',
           fontFamily: 'inherit',
           marginLeft: '16px',
-        }}>
-          ⌘K
-        </kbd>
+        }}>⌘K</kbd>
       </button>
 
       {/* Right actions */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+
         {/* Language toggle */}
         <button
           onClick={toggleLocale}
           style={{
-            display: 'flex',
-            alignItems: 'center',
+            ...iconBtnStyle,
+            width: 'auto',
+            padding: '0 10px',
             gap: '4px',
-            padding: '4px 10px',
-            background: 'var(--bg)',
-            border: '1px solid var(--border)',
-            borderRadius: 'var(--radius-md)',
-            cursor: 'pointer',
             fontSize: '11px',
             fontWeight: '600',
             letterSpacing: '0.08em',
-            transition: 'border-color 150ms ease, color 150ms ease',
-            color: 'var(--muted)',
           }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--brand)';
-            (e.currentTarget as HTMLButtonElement).style.color = 'var(--brand)';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)';
-            (e.currentTarget as HTMLButtonElement).style.color = 'var(--muted)';
-          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--brand)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--brand)'; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--muted)'; }}
         >
           <span style={{ color: currentLocale === 'en' ? 'var(--text)' : 'var(--muted)' }}>EN</span>
           <span style={{ color: 'var(--border)', fontWeight: '300' }}>/</span>
           <span style={{ color: currentLocale === 'fr' ? 'var(--text)' : 'var(--muted)' }}>FR</span>
+        </button>
+
+        {/* Theme toggle */}
+        <button
+          onClick={toggle}
+          style={iconBtnStyle}
+          title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--brand)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--brand)'; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--muted)'; }}
+        >
+          {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
         </button>
 
         <NotificationBell userId={user.id} />
@@ -166,7 +180,7 @@ export default function Topbar({ user }: { user: TopbarUser }) {
                 <p style={{ fontSize: '11px', color: 'var(--muted)' }}>{user.email}</p>
               </div>
               <Link
-                href="/settings/service-types"
+                href="/settings/profile"
                 onClick={() => setDropdownOpen(false)}
                 style={{
                   display: 'flex',
@@ -185,7 +199,7 @@ export default function Topbar({ user }: { user: TopbarUser }) {
                 {t('settings.profile.title')}
               </Link>
               <button
-                onClick={() => signOut()}
+                onClick={() => signOut({ callbackUrl: `/${currentLocale}/login` })}
                 style={{
                   display: 'flex',
                   alignItems: 'center',

@@ -31,6 +31,28 @@
   --health-critical: #ef4444;
 }
 
+[data-theme="light"] {
+  --bg: #f5f4f8;
+  --surface: #ffffff;
+  --surface-2: #ede9f5;
+  --border: #ddd8ee;
+  --border-hover: #c4bade;
+  --text: #1a1526;
+  --muted: #7c6fa0;
+  color-scheme: light;
+}
+
+[data-theme="light"] input,
+[data-theme="light"] textarea,
+[data-theme="light"] select {
+  background-color: var(--surface);
+  color: var(--text);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
 *,
 *::before,
 *::after {

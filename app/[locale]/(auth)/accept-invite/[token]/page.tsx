@@ -2,7 +2,6 @@
 
 import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
-import { verifyInviteToken } from '@/lib/utils/tokens';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 
 export default function AcceptInvitePage({
@@ -23,11 +22,13 @@ export default function AcceptInvitePage({
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    verifyInviteToken(token).then((payload) => {
-      if (payload) {
-        setEmail(payload.email);
-        setValid(true);
-      } else {
+    fetch(`/api/auth/invite/validate?token=${encodeURIComponent(token)}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.valid) {
+          setEmail(data.email);
+          setValid(true);
+        } else {
         setValid(false);
       }
     });

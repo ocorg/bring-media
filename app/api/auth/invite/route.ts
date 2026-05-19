@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
       data: { token },
     });
 
-    const acceptUrl = `${process.env.NEXT_PUBLIC_APP_URL}/accept-invite/${token}`;
+    const acceptUrl = `${process.env.NEXT_PUBLIC_APP_URL}/en/accept-invite/${token}`;
 
     await sendEmail({
       to: email,

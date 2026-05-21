@@ -62,6 +62,8 @@ model User {
   role              Role     @default(team_member)
   avatarUrl         String?
   preferredLanguage String   @default("en")
+  isHidden          Boolean  @default(false)
+  isActive          Boolean  @default(true)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 

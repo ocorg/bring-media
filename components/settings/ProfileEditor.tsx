@@ -7,7 +7,7 @@ import { useToast } from '@/lib/hooks/useToast';
 import { User, Mail, Globe, Save } from 'lucide-react';
 
 interface Props {
-  user: { id: string; name: string; email: string };
+  user: { id: string; name: string; email: string; role: string };
 }
 
 export default function ProfileEditor({ user }: Props) {
@@ -17,7 +17,10 @@ export default function ProfileEditor({ user }: Props) {
   const pathname = usePathname();
   const { toast } = useToast();
 
+  const canEditEmail = user.role === 'super_admin' || user.role === 'manager';
+
   const [name, setName] = useState(user.name ?? '');
+  const [email, setEmail] = useState(user.email ?? '');
   const [selectedLocale, setSelectedLocale] = useState(locale);
   const [loading, setLoading] = useState(false);
 
@@ -27,7 +30,7 @@ export default function ProfileEditor({ user }: Props) {
       const res = await fetch('/api/profile', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, ...(canEditEmail ? { email } : {}) }),
       });
       if (!res.ok) throw new Error();
       toast(t('saved'), 'success');
@@ -58,14 +61,41 @@ export default function ProfileEditor({ user }: Props) {
         {t('title')}
       </h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+
+        {/* Name */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
           <label style={labelStyle}><User size={12} />{t('name')}</label>
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
+
+        {/* Email — editable for super_admin and manager */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <label style={labelStyle}><Mail size={12} />{t('email')}</label>
-          <input type="email" value={user.email} readOnly style={{ opacity: 0.5, cursor: 'not-allowed' }} />
+          <label style={labelStyle}>
+            <Mail size={12} />
+            {t('email')}
+            {canEditEmail && (
+              <span style={{ fontSize: '10px', color: 'var(--brand)', fontWeight: '400', textTransform: 'none', letterSpacing: '0', marginLeft: '4px' }}>
+                (editable)
+              </span>
+            )}
+          </label>
+          {canEditEmail ? (
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          ) : (
+            <input
+              type="email"
+              value={user.email}
+              readOnly
+              style={{ opacity: 0.5, cursor: 'not-allowed' }}
+            />
+          )}
         </div>
+
+        {/* Language */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
           <label style={labelStyle}><Globe size={12} />{t('language')}</label>
           <select value={selectedLocale} onChange={(e) => setSelectedLocale(e.target.value)}>
@@ -73,6 +103,7 @@ export default function ProfileEditor({ user }: Props) {
             <option value="fr">{t('languages.fr')}</option>
           </select>
         </div>
+
         <button
           onClick={handleSave}
           disabled={loading || !name.trim()}

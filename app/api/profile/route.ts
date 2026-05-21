@@ -8,13 +8,24 @@ export async function PATCH(req: NextRequest) {
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    const { name } = await req.json() as { name: string };
+    const { name, email } = await req.json() as { name?: string; email?: string };
+
     if (!name?.trim()) {
       return NextResponse.json({ error: 'Name is required' }, { status: 400 });
     }
+
+    const updateData: { name: string; email?: string } = { name: name.trim() };
+
+    // Email editing is allowed for super_admin and manager only
+    const canEditEmail =
+      session.user.role === 'super_admin' || session.user.role === 'manager';
+    if (email?.trim() && canEditEmail) {
+      updateData.email = email.trim().toLowerCase();
+    }
+
     await prisma.user.update({
       where: { id: session.user.id },
-      data: { name: name.trim() },
+      data: updateData,
     });
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -45,6 +45,7 @@ export default async function ProjectDetailPage({
     }),
     prisma.user.findMany({
       select: { id: true, name: true },
+      where: { isHidden: false, isActive: true },
       orderBy: { name: 'asc' },
     }),
   ]);

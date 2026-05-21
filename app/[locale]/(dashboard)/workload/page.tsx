@@ -9,6 +9,7 @@ export default async function WorkloadPage() {
   if (session.user.role === 'team_member') redirect('/');
 
   const members = await prisma.user.findMany({
+    where: { isHidden: false, isActive: true },
     select: {
       id: true,
       name: true,

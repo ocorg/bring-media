@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useToast } from '@/lib/hooks/useToast';
+import { useTranslations } from 'next-intl';
 import { createTask } from '@/lib/actions/tasks';
 import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
@@ -31,6 +32,7 @@ export default function NewTaskModal({
   teamMembers,
 }: Props) {
   const { toast } = useToast();
+  const t = useTranslations('tasks');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState(stages[0]?.name ?? '');
@@ -81,7 +83,7 @@ export default function NewTaskModal({
     <Modal open={open} onClose={onClose} title="New task" maxWidth="520px">
       <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
         <Input
-          label="Title"
+          label={t('titleLabel')}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="What needs to be done?"
@@ -140,7 +142,7 @@ export default function NewTaskModal({
           </div>
 
           <Input
-            label="Estimated hours"
+            label={t('timeLogger.estimated')}
             type="number"
             value={estimatedHours}
             onChange={(e) => setEstimatedHours(e.target.value)}
@@ -151,7 +153,7 @@ export default function NewTaskModal({
         </div>
 
         <Input
-          label="Due date"
+          label={t('detail.dueDate')}
           type="date"
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}

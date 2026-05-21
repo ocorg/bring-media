@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import { Link } from '@/lib/i18n/navigation';
 import { Pencil, Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface ClientActionsProps {
   clientId: string;
@@ -18,6 +19,8 @@ interface ClientActionsProps {
 export default function ClientActions({ clientId, clientName, locale }: ClientActionsProps) {
   const router = useRouter();
   const { toast } = useToast();
+  const t = useTranslations('clients');
+  const tc = useTranslations('common');
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
@@ -25,7 +28,7 @@ export default function ClientActions({ clientId, clientName, locale }: ClientAc
     setDeleting(true);
     const result = await deleteClient(clientId);
     if (result.success) {
-      toast('Client deleted', 'success');
+      toast(t('deleted'), 'success');
       router.push(`/${locale}/clients`);
     } else {
       toast(result.error, 'error');
@@ -40,25 +43,25 @@ export default function ClientActions({ clientId, clientName, locale }: ClientAc
         <Link href={`/clients/${clientId}/edit`}>
           <Button variant="secondary" size="sm">
             <Pencil size={13} />
-            Edit
+            {t('edit')}
           </Button>
         </Link>
         <Button variant="danger" size="sm" onClick={() => setConfirmOpen(true)}>
           <Trash2 size={13} />
-          Delete
+          {t('delete')}
         </Button>
       </div>
 
-      <Modal open={confirmOpen} onClose={() => setConfirmOpen(false)} title="Delete client">
+      <Modal open={confirmOpen} onClose={() => setConfirmOpen(false)} title={t('deleteTitle')}>
         <p style={{ fontSize: '14px', color: 'var(--text)', marginBottom: '8px' }}>
-          Are you sure you want to delete <strong>{clientName}</strong>?
+          {t('deleteConfirm')} <strong>{clientName}</strong>?
         </p>
         <p style={{ fontSize: '13px', color: 'var(--muted)', marginBottom: '1.5rem' }}>
-          This will permanently remove the client and all associated data. This cannot be undone.
+          {t('deleteWarning')}
         </p>
         <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
-          <Button variant="ghost" onClick={() => setConfirmOpen(false)}>Cancel</Button>
-          <Button variant="danger" loading={deleting} onClick={handleDelete}>Delete client</Button>
+          <Button variant="ghost" onClick={() => setConfirmOpen(false)}>{tc('cancel')}</Button>
+          <Button variant="danger" loading={deleting} onClick={handleDelete}>{t('deleteBtn')}</Button>
         </div>
       </Modal>
     </>

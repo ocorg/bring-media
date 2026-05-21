@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts';
+import { useTranslations } from 'next-intl';
 
 interface MemberData {
   name: string;
@@ -30,6 +31,7 @@ const COLORS = {
 };
 
 export default function WorkloadChart({ data }: Props) {
+  const t = useTranslations('tasks.priority');
   if (data.length === 0) {
     return (
       <p style={{ textAlign: 'center', color: 'var(--muted)', fontSize: '13px', padding: '2rem' }}>
@@ -62,10 +64,10 @@ export default function WorkloadChart({ data }: Props) {
           }}
           labelStyle={{ color: '#e2e8f0', marginBottom: '4px' }}
         />
-        <Bar dataKey="urgent" stackId="a" fill={COLORS.urgent} name="Urgent" radius={[0, 0, 0, 0]} />
-        <Bar dataKey="high" stackId="a" fill={COLORS.high} name="High" />
-        <Bar dataKey="normal" stackId="a" fill={COLORS.normal} name="Normal" />
-        <Bar dataKey="low" stackId="a" fill={COLORS.low} name="Low" radius={[3, 3, 0, 0]} />
+        <Bar dataKey="urgent" stackId="a" fill={COLORS.urgent} name={t('urgent')} radius={[0, 0, 0, 0]} />
+        <Bar dataKey="high" stackId="a" fill={COLORS.high} name={t('high')} />
+        <Bar dataKey="normal" stackId="a" fill={COLORS.normal} name={t('normal')} />
+        <Bar dataKey="low" stackId="a" fill={COLORS.low} name={t('low')} radius={[3, 3, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );

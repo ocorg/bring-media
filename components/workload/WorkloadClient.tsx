@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useToast } from '@/lib/hooks/useToast';
+import { useTranslations } from 'next-intl';
 import { updateTask } from '@/lib/actions/tasks';
 import WorkloadChart from '@/components/dashboard/WorkloadChart';
 import Modal from '@/components/ui/Modal';
@@ -35,6 +36,8 @@ const PRIORITY_COLORS: Record<string, string> = {
 
 export default function WorkloadClient({ members }: Props) {
   const { toast } = useToast();
+  const t = useTranslations('workload');
+  const tc = useTranslations('common');
   const [reassigning, setReassigning] = useState<{ taskId: string; taskTitle: string; fromName: string } | null>(null);
   const [newAssigneeId, setNewAssigneeId] = useState('');
   const [saving, setSaving] = useState(false);
@@ -203,7 +206,7 @@ export default function WorkloadClient({ members }: Props) {
       <Modal
         open={!!reassigning}
         onClose={() => setReassigning(null)}
-        title="Reassign task"
+        title={t('reassignTask')}
         maxWidth="400px"
       >
         {reassigning && (
@@ -223,9 +226,9 @@ export default function WorkloadClient({ members }: Props) {
               </select>
             </div>
             <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-              <Button variant="secondary" onClick={() => setReassigning(null)}>Cancel</Button>
+              <Button variant="secondary" onClick={() => setReassigning(null)}>{tc('cancel')}</Button>
               <Button variant="primary" loading={saving} onClick={handleReassign}>
-                Reassign
+                {t('reassign')}
               </Button>
             </div>
           </div>

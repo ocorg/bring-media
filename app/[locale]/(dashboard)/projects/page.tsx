@@ -5,9 +5,11 @@ import ProjectCard from '@/components/projects/ProjectCard';
 import EmptyState from '@/components/ui/EmptyState';
 import Button from '@/components/ui/Button';
 import { Plus } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 export default async function ProjectsPage() {
   const session = await auth();
+  const t = await getTranslations('projects');
 
   const projects = await prisma.project.findMany({
     orderBy: { createdAt: 'desc' },
@@ -41,7 +43,7 @@ export default async function ProjectsPage() {
               marginBottom: '4px',
             }}
           >
-            Projects
+            {t('title')}
           </h1>
           <p style={{ fontSize: '13px', color: 'var(--muted)' }}>
             {projects.length} project{projects.length !== 1 ? 's' : ''}
@@ -52,7 +54,7 @@ export default async function ProjectsPage() {
           <Link href="/projects/new" style={{ textDecoration: 'none' }}>
             <Button variant="primary">
               <Plus size={15} />
-              New project
+              {t('new')}
             </Button>
           </Link>
         )}
@@ -61,14 +63,14 @@ export default async function ProjectsPage() {
       {/* Grid */}
       {projects.length === 0 ? (
         <EmptyState
-          title="No projects yet"
-          description="Create your first project to start tracking work."
+          title={t('empty')}
+          description={t('emptyDescription')}
           action={
             canCreate ? (
               <Link href="/projects/new" style={{ textDecoration: 'none' }}>
                 <Button variant="primary">
                   <Plus size={15} />
-                  New project
+                  {t('new')}
                 </Button>
               </Link>
             ) : undefined

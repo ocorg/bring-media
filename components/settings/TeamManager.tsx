@@ -6,6 +6,7 @@ import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 import Avatar from '@/components/ui/Avatar';
 import { Plus, Mail, Trash2, Clock } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface Member {
   id: string;
@@ -41,6 +42,7 @@ const ROLE_LABELS: Record<string, string> = {
 };
 
 export default function TeamManager({ initialMembers, initialInvites }: Props) {
+  const t = useTranslations('settings.team');
   const { toast } = useToast();
   const [members] = useState<Member[]>(initialMembers);
   const [invites, setInvites] = useState<PendingInvite[]>(initialInvites);
@@ -169,7 +171,7 @@ export default function TeamManager({ initialMembers, initialInvites }: Props) {
                   style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--danger)', padding: '4px', display: 'flex', opacity: 0.6, transition: 'opacity 150ms ease' }}
                   onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.opacity = '1')}
                   onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.opacity = '0.6')}
-                  title="Revoke invitation"
+                  title={t('revokeInvite')}
                 >
                   <Trash2 size={13} />
                 </button>
@@ -180,7 +182,7 @@ export default function TeamManager({ initialMembers, initialInvites }: Props) {
       )}
 
       {/* Invite modal */}
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title="Invite team member" maxWidth="420px">
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={t('inviteTitle')} maxWidth="420px">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
             <label style={{ fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)' }}>

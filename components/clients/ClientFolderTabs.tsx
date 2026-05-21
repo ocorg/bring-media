@@ -7,6 +7,7 @@ import EmptyState from '@/components/ui/EmptyState';
 import Button from '@/components/ui/Button';
 import { Plus, ExternalLink, Clock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 type Tab = 'overview' | 'projects' | 'activity';
 
@@ -53,7 +54,9 @@ function AssetLink({ label, url }: { label: string; url?: string | null }) {
   );
 }
 
-export default function ClientFolderTabs({ client, canEdit }: ClientFolderTabsProps) {
+export default function ClientFolderTabs({ client, canEdit, locale }: ClientFolderTabsProps) {
+  const t = useTranslations('clients');
+  const tc = useTranslations('common');
   const [activeTab, setActiveTab] = useState<Tab>('overview');
   const router = useRouter();
 
@@ -103,18 +106,18 @@ export default function ClientFolderTabs({ client, canEdit }: ClientFolderTabsPr
           {(client.contactName || client.contactEmail || client.contactPhone) && (
             <div style={{ marginBottom: '1.5rem' }}>
               <SectionTitle>Contact information</SectionTitle>
-              <InfoRow label="Name" value={client.contactName} />
-              <InfoRow label="Email" value={client.contactEmail} />
-              <InfoRow label="Phone" value={client.contactPhone} />
-              <InfoRow label="Retainer" value={client.retainerType} />
+              <InfoRow label={t('overview.name')} value={client.contactName} />
+              <InfoRow label={t('overview.email')} value={client.contactEmail} />
+              <InfoRow label={t('overview.phone')} value={client.contactPhone} />
+              <InfoRow label={t('overview.retainer')} value={client.retainerType} />
             </div>
           )}
 
           {(client.contractStart || client.contractEnd) && (
             <div style={{ marginBottom: '1.5rem' }}>
               <SectionTitle>Contract details</SectionTitle>
-              <InfoRow label="Start date" value={client.contractStart ? new Date(client.contractStart).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : null} />
-              <InfoRow label="End date" value={client.contractEnd ? new Date(client.contractEnd).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : null} />
+              <InfoRow label={t('overview.startDate')} value={client.contractStart ? new Date(client.contractStart).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : null} />
+              <InfoRow label={t('overview.endDate')} value={client.contractEnd ? new Date(client.contractEnd).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : null} />
             </div>
           )}
 
@@ -122,9 +125,9 @@ export default function ClientFolderTabs({ client, canEdit }: ClientFolderTabsPr
             <div style={{ marginBottom: '1.5rem' }}>
               <SectionTitle>Linked assets</SectionTitle>
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '8px' }}>
-                <AssetLink label="Drive folder" url={client.driveFolderUrl} />
-                <AssetLink label="Brand kit" url={client.brandKitUrl} />
-                <AssetLink label="Website" url={client.websiteUrl} />
+                <AssetLink label={t('overview.driveFolder')} url={client.driveFolderUrl} />
+                <AssetLink label={t('overview.brandKit')} url={client.brandKitUrl} />
+                <AssetLink label={t('overview.website')} url={client.websiteUrl} />
               </div>
             </div>
           )}
@@ -155,7 +158,7 @@ export default function ClientFolderTabs({ client, canEdit }: ClientFolderTabsPr
             </div>
           )}
           {client.projects?.length === 0 ? (
-            <EmptyState title="No projects yet" description="Projects for this client will appear here." />
+            <EmptyState title={t('overview.noProjects')} description={t('overview.noProjectsDesc')} />
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {client.projects?.map((project: any) => (
@@ -179,7 +182,7 @@ export default function ClientFolderTabs({ client, canEdit }: ClientFolderTabsPr
       {activeTab === 'activity' && (
         <div style={{ maxWidth: '560px' }}>
           {client.activityLogs?.length === 0 ? (
-            <EmptyState title="No activity yet" description="Actions on this client will appear here." />
+            <EmptyState title={t('overview.noActivity')} description={t('overview.noActivityDesc')} />
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
               {client.activityLogs?.map((log: any, i: number) => (

@@ -5,9 +5,11 @@ import ClientCard from '@/components/clients/ClientCard';
 import EmptyState from '@/components/ui/EmptyState';
 import Button from '@/components/ui/Button';
 import { Plus } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 export default async function ClientsPage() {
   const session = await auth();
+  const t = await getTranslations('clients');
 
   const clients = await prisma.client.findMany({
     orderBy: { createdAt: 'desc' },
@@ -29,7 +31,7 @@ export default async function ClientsPage() {
       }}>
         <div>
           <h1 style={{ fontSize: '22px', fontWeight: '500', color: 'var(--text)', marginBottom: '4px' }}>
-            Clients
+            {t('title')}
           </h1>
           <p style={{ fontSize: '13px', color: 'var(--muted)' }}>
             {clients.length} client{clients.length !== 1 ? 's' : ''}
@@ -40,7 +42,7 @@ export default async function ClientsPage() {
           <Link href="/clients/new" style={{ textDecoration: 'none' }}>
             <Button variant="primary">
               <Plus size={15} />
-              New client
+              {t('new')}
             </Button>
           </Link>
         )}
@@ -49,14 +51,14 @@ export default async function ClientsPage() {
       {/* Grid */}
       {clients.length === 0 ? (
         <EmptyState
-          title="No clients yet"
-          description="Create your first client to start managing projects and tasks."
+          title={t('empty')}
+          description={t('emptyDescription')}
           action={
             canCreate ? (
               <Link href="/clients/new" style={{ textDecoration: 'none' }}>
                 <Button variant="primary">
                   <Plus size={15} />
-                  New client
+                  {t('new')}
                 </Button>
               </Link>
             ) : undefined

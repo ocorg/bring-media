@@ -46,6 +46,7 @@ function SortableStageRow({
   onApprovalToggle: (id: string) => void;
   onDelete: (id: string) => void;
 }) {
+  const t = useTranslations('settings.pipeline');
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: stage.id });
 
@@ -120,7 +121,7 @@ function SortableStageRow({
       {/* Approval toggle */}
       <button
         onClick={() => onApprovalToggle(stage.id)}
-        title="Requires approval"
+        title={t('requiresApproval')}
         style={{
           background: 'none',
           border: 'none',

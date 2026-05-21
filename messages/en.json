@@ -52,10 +52,18 @@
     }
   },
   "clients": {
+    "delete": "Delete",
+    "deleteTitle": "Delete client",
+    "deleteConfirm": "Are you sure you want to delete",
+    "deleteWarning": "This will permanently remove the client and all associated data. This cannot be undone.",
+    "deleteBtn": "Delete client",
+    "deleted": "Client deleted",
+    "editBtn": "Edit",
+    "deleteAction": "Delete",
     "title": "Clients",
     "new": "New client",
     "empty": "No clients yet",
-    "emptyDescription": "Create your first client to get started",
+    "emptyDescription": "Create your first client to start managing projects and tasks.",
     "health": {
       "healthy": "Healthy",
       "at_risk": "At risk",
@@ -85,6 +93,19 @@
       "activity": "Activity"
     },
     "overview": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "retainer": "Retainer",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "driveFolder": "Drive folder",
+      "brandKit": "Brand kit",
+      "website": "Website",
+      "noProjects": "No projects yet",
+      "noProjectsDesc": "Projects for this client will appear here.",
+      "noActivity": "No activity yet",
+      "noActivityDesc": "Actions on this client will appear here.",
       "contactInfo": "Contact information",
       "contractDetails": "Contract details",
       "linkedAssets": "Linked assets",
@@ -92,6 +113,8 @@
     }
   },
   "projects": {
+    "toggleApproval": "Toggle approval gate",
+    "emptyDescriptionPage": "Create your first project to start tracking work.",
     "title": "Projects",
     "new": "New project",
     "empty": "No projects yet",
@@ -118,6 +141,7 @@
     }
   },
   "tasks": {
+    "titleLabel": "Title",
     "new": "New task",
     "empty": "No tasks in this stage",
     "priority": {
@@ -180,6 +204,10 @@
       "delete": "Delete"
     }
   },
+  "workload": {
+    "reassignTask": "Reassign task",
+    "reassign": "Reassign"
+  },
   "settings": {
     "pipeline": {
       "title": "Pipeline templates",
@@ -213,6 +241,8 @@
       "active": "Active"
     },
     "team": {
+      "revokeInvite": "Revoke invitation",
+      "inviteTitle": "Invite team member",
       "title": "Team",
       "subtitle": "Manage team members and send invitations",
       "invite": "Invite member",

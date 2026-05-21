@@ -52,10 +52,18 @@
     }
   },
   "clients": {
+    "delete": "Supprimer",
+    "deleteTitle": "Supprimer le client",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer",
+    "deleteWarning": "Cela supprimera définitivement le client et toutes les données associées. Cette action est irréversible.",
+    "deleteBtn": "Supprimer le client",
+    "deleted": "Client supprimé",
+    "editBtn": "Modifier",
+    "deleteAction": "Supprimer",
     "title": "Clients",
     "new": "Nouveau client",
     "empty": "Aucun client pour l'instant",
-    "emptyDescription": "Créez votre premier client pour commencer",
+    "emptyDescription": "Créez votre premier client pour commencer à gérer vos projets et tâches.",
     "health": {
       "healthy": "Sain",
       "at_risk": "À risque",
@@ -85,6 +93,19 @@
       "activity": "Activité"
     },
     "overview": {
+      "name": "Nom",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "retainer": "Contrat",
+      "startDate": "Date de début",
+      "endDate": "Date de fin",
+      "driveFolder": "Dossier Drive",
+      "brandKit": "Kit de marque",
+      "website": "Site web",
+      "noProjects": "Aucun projet pour l'instant",
+      "noProjectsDesc": "Les projets de ce client apparaîtront ici.",
+      "noActivity": "Aucune activité",
+      "noActivityDesc": "Les actions sur ce client apparaîtront ici.",
       "contactInfo": "Informations de contact",
       "contractDetails": "Détails du contrat",
       "linkedAssets": "Ressources liées",
@@ -92,6 +113,8 @@
     }
   },
   "projects": {
+    "toggleApproval": "Basculer la porte d'approbation",
+    "emptyDescriptionPage": "Créez votre premier projet pour commencer le suivi.",
     "title": "Projets",
     "new": "Nouveau projet",
     "empty": "Aucun projet pour l'instant",
@@ -118,6 +141,7 @@
     }
   },
   "tasks": {
+    "titleLabel": "Titre",
     "new": "Nouvelle tâche",
     "empty": "Aucune tâche dans cette étape",
     "priority": {
@@ -180,6 +204,10 @@
       "delete": "Supprimer"
     }
   },
+  "workload": {
+    "reassignTask": "Réassigner la tâche",
+    "reassign": "Réassigner"
+  },
   "settings": {
     "pipeline": {
       "title": "Modèles de pipeline",
@@ -213,6 +241,8 @@
       "active": "Actif"
     },
     "team": {
+      "revokeInvite": "Révoquer l'invitation",
+      "inviteTitle": "Inviter un membre",
       "title": "Équipe",
       "subtitle": "Gérer les membres de l'équipe et envoyer des invitations",
       "invite": "Inviter un membre",

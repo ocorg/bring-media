@@ -108,26 +108,8 @@ export default function MaintenancePage() {
           Need urgent access? Contact your manager.
         </p>
 
-        {/* Sign-in link — lets super admin reach the login page */}
-        <Link
-          href="/login"
-          style={{
-            fontSize: '12px',
-            color: 'var(--muted)',
-            textDecoration: 'none',
-            opacity: 0.4,
-            borderBottom: '1px solid transparent',
-            transition: 'opacity 150ms ease, border-color 150ms ease',
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.opacity = '0.8';
-            (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = 'var(--muted)';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.opacity = '0.4';
-            (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = 'transparent';
-          }}
-        >
+        {/* Sign-in link — no JS event handlers, hover handled purely via CSS */}
+        <Link href="/login" className="maintenance-signin">
           Sign in
         </Link>
 
@@ -141,6 +123,19 @@ export default function MaintenancePage() {
         @keyframes maintenance-pulse {
           0%, 100% { opacity: 1; }
           50%       { opacity: 0.3; }
+        }
+        .maintenance-signin {
+          font-size: 12px;
+          color: var(--muted);
+          text-decoration: none;
+          opacity: 0.4;
+          border-bottom: 1px solid transparent;
+          transition: opacity 150ms ease, border-color 150ms ease;
+          padding-bottom: 1px;
+        }
+        .maintenance-signin:hover {
+          opacity: 0.8;
+          border-bottom-color: var(--muted);
         }
       `}</style>
     </div>

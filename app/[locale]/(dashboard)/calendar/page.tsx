@@ -40,6 +40,10 @@ export default async function CalendarPage() {
       },
     }),
     prisma.user.findMany({
+      where: {
+        isHidden: false,
+        isActive: true,
+      },
       select: { id: true, name: true },
       orderBy: { name: 'asc' },
     }),

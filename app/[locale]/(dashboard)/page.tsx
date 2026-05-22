@@ -61,6 +61,10 @@ export default async function DashboardPage() {
     }),
     isManager
       ? prisma.user.findMany({
+          where: {
+            isHidden: false,
+            isActive: true,
+          },
           select: {
             id: true,
             name: true,
@@ -76,7 +80,6 @@ export default async function DashboardPage() {
 
   const hoursLogged = hoursResult._sum.hours ? Number(hoursResult._sum.hours).toFixed(1) : '0';
 
-  // Build workload chart data
   const chartData = members.map((m) => ({
     name: m.name.split(' ')[0],
     urgent: m.assignedTasks.filter((t) => t.priority === 'urgent').length,
@@ -126,7 +129,6 @@ export default async function DashboardPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      {/* Header */}
       <div>
         <h1 style={{ fontSize: '22px', fontWeight: '500', color: 'var(--text)', marginBottom: '4px' }}>
           Dashboard
@@ -136,17 +138,13 @@ export default async function DashboardPage() {
         </p>
       </div>
 
-      {/* KPI row */}
       <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
         {kpis.map((kpi) => (
           <KpiCard key={kpi.label} {...kpi} />
         ))}
       </div>
 
-      {/* Bottom grid */}
       <div style={{ display: 'grid', gridTemplateColumns: isManager ? '1fr 1fr' : '1fr', gap: '1.5rem' }}>
-
-        {/* Overdue list */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
             <p style={{ fontSize: '13px', fontWeight: '500', color: 'var(--text)' }}>
@@ -159,7 +157,6 @@ export default async function DashboardPage() {
           <OverdueList tasks={overdueList} />
         </div>
 
-        {/* Workload chart (managers only) */}
         {isManager && (
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>

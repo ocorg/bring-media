@@ -1,4 +1,5 @@
 import { Settings } from 'lucide-react';
+import Link from 'next/link';
 
 export default function MaintenancePage() {
   return (
@@ -103,9 +104,32 @@ export default function MaintenancePage() {
         />
 
         {/* Contact note */}
-        <p style={{ fontSize: '12px', color: 'var(--muted)', opacity: 0.65 }}>
+        <p style={{ fontSize: '12px', color: 'var(--muted)', opacity: 0.65, marginBottom: '2rem' }}>
           Need urgent access? Contact your manager.
         </p>
+
+        {/* Sign-in link — lets super admin reach the login page */}
+        <Link
+          href="/login"
+          style={{
+            fontSize: '12px',
+            color: 'var(--muted)',
+            textDecoration: 'none',
+            opacity: 0.4,
+            borderBottom: '1px solid transparent',
+            transition: 'opacity 150ms ease, border-color 150ms ease',
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLAnchorElement).style.opacity = '0.8';
+            (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = 'var(--muted)';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLAnchorElement).style.opacity = '0.4';
+            (e.currentTarget as HTMLAnchorElement).style.borderBottomColor = 'transparent';
+          }}
+        >
+          Sign in
+        </Link>
 
       </div>
 

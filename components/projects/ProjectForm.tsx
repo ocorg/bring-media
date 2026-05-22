@@ -92,10 +92,6 @@ function SortableStage({
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: stage.id });
 
-  function t(arg0: string): string | undefined {
-    throw new Error('Function not implemented.');
-  }
-
   return (
     <div
       ref={setNodeRef}
@@ -152,7 +148,7 @@ function SortableStage({
 
       <button
         onClick={() => onApprovalToggle(stage.id)}
-        title={t('toggleApproval')}
+        title="Toggle approval gate"
         style={{
           background: 'none',
           border: 'none',
